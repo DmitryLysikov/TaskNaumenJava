@@ -6,11 +6,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AppConfig {
-    @Value("${app.name}")
-    private String appName;
+    private final String appName;
+    private final String appVersion;
 
-    @Value("${app.version}")
-    private String appVersion;
+    public AppConfig(@Value("${app.name}") String appName,
+                     @Value("${app.version}") String appVersion)
+    {
+        this.appName = appName;
+        this.appVersion = appVersion;
+    }
 
     @PostConstruct
     public void printAppInfo() {
